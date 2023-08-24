@@ -172,8 +172,9 @@ function divide(n1,n2) {
 
 document.querySelector('.clear-container').addEventListener('click', () => {
     expression = '';
+    previousExpression = '';
     document.querySelector('.display-screen').innerHTML = '0';
-    document.querySelector('.previous-screen').innerHTML = expression;
+    document.querySelector('.previous-screen').innerHTML = '';
 })
 
 document.querySelector('.delete-container').addEventListener('click', () => {
