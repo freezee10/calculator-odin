@@ -1,0 +1,65 @@
+.calc {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    width: 400px;
+    height: 520px;
+    background-color: gray;
+    border-radius: 5px;;
+    
+}
+
+.outer {
+display: flex;
+justify-content: center;
+align-items: center;
+margin-top: 85px;
+}
+
+.display-screen-container {
+    margin-top: 20px;
+    width: 350px;
+    background-color: white;
+    height: 50px;
+}
+
+.cd {
+    display: flex;
+    gap: 10px;
+}
+
+.delete, .clear {
+    background-color: white;
+ cursor: pointer;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+   
+    gap: 10px;
+    
+}
+
+.button-row {
+    display: flex;
+   
+    gap: 10px;
+    
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 30px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.clicked {
+    background-color: purple;
+}
