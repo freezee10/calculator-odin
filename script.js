@@ -15,8 +15,12 @@ let operationUsed = false;
 function calculation() {
 
 let operation = getOperator();
+console.log(expression);
+
 num1 = Number(expression.slice(0, operationIndex));
+
 num2 = Number(expression.slice(operationIndex+1, expression.length-1));
+
 previousExpression = `${num1} ${operation} ${num2} =`;
 document.querySelector('.previous-screen').innerHTML = previousExpression;
 
@@ -25,7 +29,13 @@ let lastOperation = expression[expression.length-1];
 answer = operator(operation,num1, num2);
 
 answer = answer.toString();
+if(answer.length > 3) {
+    answer = Number(answer);
+    answer = answer.toFixed(2);
+    answer = answer.toString();
+} else {
 
+}
 
 if(answer === 'Infinity') {
     document.querySelector('.display-screen').innerHTML = "DONT DO THAT";
@@ -109,7 +119,7 @@ operationUsed = true;
 
 function getOperator() {
     let operation;
-    for(let i = 0; i < expression.length; i++) {
+    for(let i = 1; i < expression.length; i++) {
         if(expression[i] === '+' || expression[i] === '-' || expression[i] === 'x' || expression[i] === '/') {
             operationIndex = i;
             operation = expression[i];
@@ -168,5 +178,7 @@ document.querySelector('.clear-container').addEventListener('click', () => {
 
 document.querySelector('.delete-container').addEventListener('click', () => {
     expression = expression.slice(0,-1);
-    document.querySelector('.display-screen').innerHTML = expression;
+    previousExpression = expression.slice(0,-1);
+
+    document.querySelector('.previous-screen').innerHTML = previousExpression;
 })
