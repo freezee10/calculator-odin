@@ -5,9 +5,9 @@
     align-items: center;
     gap: 20px;
     width: 400px;
-    height: 520px;
-    background-color: gray;
-    border-radius: 5px;;
+    height: 550px;
+    background-color: black;
+    border-radius: 5px;
     
 }
 
@@ -19,10 +19,31 @@ margin-top: 85px;
 }
 
 .display-screen-container {
+    
     margin-top: 20px;
-    width: 350px;
-    background-color: white;
-    height: 50px;
+    width: 365px;
+    background-color: rgb(238, 238, 238);
+    height: 120px;
+    border: 2px black solid;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+justify-content: center;
+
+    gap: 15px;
+}
+
+.display-screen, .previous-screen {
+    margin-right: 20px;
+}
+
+.previous-screen {
+    font-size: 22.5px;
+}
+
+.display-screen {
+    font-size: 30px;
 }
 
 .cd {
@@ -30,11 +51,36 @@ margin-top: 85px;
     gap: 10px;
 }
 
-.delete, .clear {
-    background-color: white;
- cursor: pointer;
+.delete-container, .clear-container {
+    border-radius: 5px;
+    
+    cursor: pointer;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+ width: 177.5px;
+ height: 60px;
+}
+.clear-container {
+    background-color: #d7263d;
+}
+.delete-container {
+    background-color: #32cbff;
+    
 }
 
+.delete, .clear {
+    font-size: 20px;
+    
+}
+
+.delete-container:hover, .clear-container:hover {
+    opacity: 0.65;
+}
+
+.delete-container:active, .clear-container:active {
+    opacity: 0.5;
+}
 .buttons {
     display: flex;
     flex-direction: column;
@@ -51,15 +97,14 @@ margin-top: 85px;
 }
 
 .button {
+    font-size: 30px;
+    border: 2px black solid;
+    border-radius: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 35px;
-    height: 30px;
-    background-color: white;
+    width: 80px;
+    height: 60px;
+    background-color: rgb(238, 238, 238);
     cursor: pointer;
-}
-
-.clicked {
-    background-color: purple;
 }

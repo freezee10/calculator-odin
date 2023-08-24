@@ -2,13 +2,14 @@
 
 let num1 = '';
 let num2 = '';
+
 let expression = "";
+
+let previousExpression = "";
+
 let operationIndex;
 let answer = 0;
 let operationUsed = false;
-let displaying = '';
-
-
 
 
 function calculation() {
@@ -16,6 +17,9 @@ function calculation() {
 let operation = getOperator();
 num1 = Number(expression.slice(0, operationIndex));
 num2 = Number(expression.slice(operationIndex+1, expression.length-1));
+previousExpression = `${num1} ${operation} ${num2} =`;
+document.querySelector('.previous-screen').innerHTML = previousExpression;
+
 let lastOperation = expression[expression.length-1];
 
 answer = operator(operation,num1, num2);
@@ -28,13 +32,20 @@ if(answer === 'Infinity') {
     return;
 }
 if(lastOperation === '=') {
+    
+    document.querySelector('.previous-screen').innerHTML = previousExpression;
+   
     operationUsed = false;
     expression = answer;
+    document.querySelector('.display-screen').innerHTML = expression;
+    previousExpression = expression;
     
-    document.querySelector('.display-screen').innerHTML = expression;
 } else {
+
     expression = `${answer}${lastOperation}`;
-    document.querySelector('.display-screen').innerHTML = expression;
+    previousExpression = `${answer} ${lastOperation} `;
+    document.querySelector('.previous-screen').innerHTML = previousExpression;
+    document.querySelector('.display-screen').innerHTML = answer;
 }
 
 
@@ -44,10 +55,21 @@ if(lastOperation === '=') {
 document.querySelectorAll('.button').forEach((button) => {
 
     button.addEventListener('click', () => {
+        
         expression += button.dataset.button;
+        if(button.dataset.button === '+' || button.dataset.button === '-' || button.dataset.button === 'x' || button.dataset.button === '/') {
+            
+           let operation = expression[expression.length-1];
+           previousExpression = `${previousExpression} ${operation} `;
+           document.querySelector('.previous-screen').innerHTML = previousExpression;
+        } else {
+            previousExpression += button.dataset.button;
+            document.querySelector('.previous-screen').innerHTML = previousExpression;
+        }
+
       
-      document.querySelector('.display-screen').innerHTML = expression;
         if(operationUsed === true) {
+            
             if(button.dataset.button === '+' || button.dataset.button === '-' || button.dataset.button === 'x' || button.dataset.button === '/' || button.dataset.button === '=') {
                 
                 calculation();
@@ -56,12 +78,10 @@ document.querySelectorAll('.button').forEach((button) => {
      
        if(button.dataset.button === '+' || button.dataset.button === '-' || button.dataset.button === 'x' || button.dataset.button === '/') {
         operationUsed = true;
-       }
+    }
+}
 
-    
-    })
-
-})
+)});
 
 document.addEventListener('keydown', function(event) {
   
@@ -138,23 +158,15 @@ function divide(n1,n2) {
     return n1/n2;
 }
 
-document.querySelectorAll('.operation').forEach((operation) => {
-    operation.addEventListener('click', () => {
-        document.querySelector('.add').classList.remove('clicked');
-        document.querySelector('.sub').classList.remove('clicked');
-        document.querySelector('.mult').classList.remove('clicked');
-        document.querySelector('.div').classList.remove('clicked');
-        operation.classList.add('clicked');
-    })
-})
 
-document.querySelector('.clear').addEventListener('click', () => {
+
+document.querySelector('.clear-container').addEventListener('click', () => {
     expression = '';
-    document.querySelector('.display-screen').innerHTML = expression;
+    document.querySelector('.display-screen').innerHTML = '0';
+    document.querySelector('.previous-screen').innerHTML = expression;
 })
 
-
-document.querySelector('.delete').addEventListener('click', () => {
+document.querySelector('.delete-container').addEventListener('click', () => {
     expression = expression.slice(0,-1);
     document.querySelector('.display-screen').innerHTML = expression;
 })
