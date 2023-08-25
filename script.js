@@ -179,7 +179,7 @@ document.querySelector('.clear-container').addEventListener('click', () => {
 
 document.querySelector('.delete-container').addEventListener('click', () => {
     expression = expression.slice(0,-1);
-    previousExpression = expression.slice(0,-1);
+    
 
-    document.querySelector('.previous-screen').innerHTML = previousExpression;
+    document.querySelector('.display-screen').innerHTML = expression;
 })
