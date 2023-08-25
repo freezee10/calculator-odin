@@ -10,12 +10,16 @@ let previousExpression = "";
 let operationIndex;
 let answer = 0;
 let operationUsed = false;
+let decimalUsed = false;
 
 
 function calculation() {
-
+    console.log(expression.length);
+if(expression.length <= 3) {
+    return;
+}
 let operation = getOperator();
-console.log(expression);
+
 
 num1 = Number(expression.slice(0, operationIndex));
 
@@ -46,6 +50,7 @@ if(lastOperation === '=') {
     document.querySelector('.previous-screen').innerHTML = previousExpression;
    
     operationUsed = false;
+    decimalUsed = false;
     expression = answer;
     document.querySelector('.display-screen').innerHTML = expression;
     previousExpression = expression;
@@ -65,8 +70,16 @@ if(lastOperation === '=') {
 document.querySelectorAll('.button').forEach((button) => {
 
     button.addEventListener('click', () => {
-        
+       
         expression += button.dataset.button;
+       
+        if(decimalUsed === true && button.dataset.button === '.') {
+            expression = expression.slice(0,-1);
+            previousExpression = previousExpression.slice(0,-1);
+             document.querySelector('.previous-screen').innerHTML = previousExpression;
+        } else {
+
+        }
         if(button.dataset.button === '+' || button.dataset.button === '-' || button.dataset.button === 'x' || button.dataset.button === '/') {
             
            let operation = expression[expression.length-1];
@@ -81,13 +94,18 @@ document.querySelectorAll('.button').forEach((button) => {
         if(operationUsed === true) {
             
             if(button.dataset.button === '+' || button.dataset.button === '-' || button.dataset.button === 'x' || button.dataset.button === '/' || button.dataset.button === '=') {
-                
-                calculation();
+              
+               calculation();
+             
             }
            }
      
        if(button.dataset.button === '+' || button.dataset.button === '-' || button.dataset.button === 'x' || button.dataset.button === '/') {
         operationUsed = true;
+    }
+    if(button.dataset.button === '.') {
+        console.log('clicked');
+        decimalUsed = true;
     }
 }
 
@@ -115,6 +133,13 @@ operationUsed = true;
 }
 });
 
+function ifOperator() {
+    for(let i = 1; i < expression.length; i++) {
+        if(expression[i] === '+' || expression[i] === '-' || expression[i] === 'x' || expression[i] === '/') {
+            return true;
+        }
+    }
+}
 
 
 function getOperator() {
